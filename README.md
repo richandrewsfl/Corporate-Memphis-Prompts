@@ -55,15 +55,16 @@ Since this is a lightweight, static client-side web application, there are no de
    cd Corporate-Memphis-Prompts
    ```
 2. **Open the web page:**
-   Simply double-click `index.html` or run a local static server:
+   Simply double-click `public/index.html` or run a local static server:
    ```bash
-   # Using Python
-   python3 -m http.server 8000
+   # Using wrangler to emulate Cloudflare Workers locally
+   npx wrangler dev
    
-   # Using Node.js
-   npx serve .
+   # Or using a simple Python server
+   cd public
+   python3 -m http.server 8000
    ```
-3. Open `http://localhost:8000` (or `http://localhost:3000`) in your browser.
+3. Open `http://localhost:8787` (for wrangler) or `http://localhost:8000` (for Python) in your browser.
 
 ---
 

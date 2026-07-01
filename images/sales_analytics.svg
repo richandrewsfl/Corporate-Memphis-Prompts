@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300" width="100%" height="100%">
+  <rect width="100%" height="100%" fill="#1a1c24"/>
+  <!-- Grid Lines -->
+  <path d="M 50,40 L 50,240 M 110,40 L 110,240 M 170,40 L 170,240 M 230,40 L 230,240 M 290,40 L 290,240 M 350,40 L 350,240" stroke="#2d3748" stroke-width="1.5" opacity="0.3" />
+  <path d="M 50,240 L 350,240 M 50,190 L 350,190 M 50,140 L 350,140 M 50,90 L 350,90 M 50,40 L 350,40" stroke="#2d3748" stroke-width="1.5" opacity="0.3" />
+  
+  <!-- Upward Trend Line (Glowing neon teal) -->
+  <path d="M 50,220 Q 110,180 170,120 T 290,70 L 350,50" fill="none" stroke="#1abc9c" stroke-width="5" stroke-linecap="round" />
+  <!-- Glow -->
+  <path d="M 50,220 Q 110,180 170,120 T 290,70 L 350,50" fill="none" stroke="#1abc9c" stroke-width="12" stroke-linecap="round" opacity="0.25" />
+  
+  <!-- Bar Charts (Underneath the line) -->
+  <rect x="75" y="160" width="25" height="80" rx="3" fill="#9b59b6" opacity="0.8" />
+  <rect x="135" y="130" width="25" height="110" rx="3" fill="#ff7675" opacity="0.8" />
+  <rect x="195" y="90" width="25" height="150" rx="3" fill="#ffd700" opacity="0.8" />
+  <rect x="255" y="110" width="25" height="130" rx="3" fill="#2ecc71" opacity="0.8" />
+  <rect x="315" y="60" width="25" height="180" rx="3" fill="#1abc9c" opacity="0.8" />
+  
+  <!-- Floating Coin/Currency symbols -->
+  <g transform="translate(300, 100) rotate(15)">
+    <circle cx="15" cy="15" r="15" fill="#f1c40f" />
+    <text x="10" y="21" font-family="'Outfit', sans-serif" font-weight="bold" font-size="16" fill="#d35400">$</text>
+  </g>
+  <g transform="translate(110, 60) rotate(-10)">
+    <circle cx="12" cy="12" r="12" fill="#ffd700" />
+    <text x="8" y="17" font-family="'Outfit', sans-serif" font-weight="bold" font-size="12" fill="#d35400">$</text>
+  </g>
+  
+  <!-- Stylized Figure pointing at chart (Large hand/limb) -->
+  <g transform="translate(-10, 120)">
+    <!-- Arm -->
+    <path d="M 0,160 Q 50,150 90,120 L 98,132 Q 50,165 0,180 Z" fill="#2ecc71" />
+    <!-- Hand pointing -->
+    <path d="M 90,120 C 95,115 105,112 110,120 C 115,128 105,135 98,132" fill="#ff7675" />
+    <line x1="102" y1="122" x2="118" y2="114" stroke="#ff7675" stroke-width="4.5" stroke-linecap="round" />
+  </g>
+  
+</svg>

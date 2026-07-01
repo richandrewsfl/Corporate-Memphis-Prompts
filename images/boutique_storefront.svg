@@ -1,0 +1,54 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300" width="100%" height="100%">
+  <rect width="100%" height="100%" fill="#1a1c24"/>
+  <!-- Decorative background elements -->
+  <circle cx="320" cy="80" r="50" fill="#2d3748" opacity="0.3" />
+  <path d="M 40,50 L 60,80 L 20,80 Z" fill="#e67e22" opacity="0.5" />
+  
+  <!-- Boutique Facade & Window Frame -->
+  <rect x="30" y="30" width="340" height="240" fill="none" stroke="#2c3e50" stroke-width="6" />
+  <!-- Glass highlights -->
+  <line x1="50" y1="50" x2="100" y2="150" stroke="#ffffff" stroke-width="2" opacity="0.15" />
+  <line x1="70" y1="50" x2="110" y2="130" stroke="#ffffff" stroke-width="2" opacity="0.15" />
+  
+  <!-- Shop Sign Board -->
+  <rect x="140" y="45" width="120" height="40" rx="4" fill="#d35400" />
+  <!-- Hanging chains -->
+  <line x1="160" y1="30" x2="160" y2="45" stroke="#7f8c8d" stroke-width="2" />
+  <line x1="240" y1="30" x2="240" y2="45" stroke="#7f8c8d" stroke-width="2" />
+  <!-- Abstract script text on sign -->
+  <path d="M 160,65 Q 170,55 180,65 T 200,65 T 220,65 T 240,65" fill="none" stroke="#ffffff" stroke-width="3" stroke-linecap="round" />
+  
+  <!-- Clothing Rack (Visible inside through the window) -->
+  <g transform="translate(60, 100)">
+    <!-- Stand -->
+    <line x1="30" y1="130" x2="170" y2="130" stroke="#7f8c8d" stroke-width="3" />
+    <line x1="50" y1="130" x2="50" y2="50" stroke="#7f8c8d" stroke-width="3" />
+    <line x1="150" y1="130" x2="150" y2="50" stroke="#7f8c8d" stroke-width="3" />
+    <line x1="50" y1="50" x2="150" y2="50" stroke="#7f8c8d" stroke-width="3" />
+    
+    <!-- Hangers & Clothes -->
+    <!-- Garment 1 (Dress - Coral/Pink) -->
+    <path d="M 70,50 L 73,60 L 60,65 L 60,110 L 90,110 L 90,65 L 77,60 Z" fill="#ff7675" />
+    <!-- Garment 2 (Shirt - Teal) -->
+    <path d="M 100,50 L 103,60 L 90,65 L 90,95 L 120,95 L 120,65 L 107,60 Z" fill="#1abc9c" />
+    <!-- Garment 3 (Jacket - Yellow) -->
+    <path d="M 130,50 L 133,60 L 120,65 L 120,105 L 148,105 L 148,65 L 137,60 Z" fill="#f1c40f" />
+  </g>
+  
+  <!-- Large Potted Plant (Cozy boutique environment) -->
+  <g transform="translate(260, 140)">
+    <!-- Ceramic Pot -->
+    <path d="M 20,90 L 60,90 L 70,130 L 10,130 Z" fill="#bdc3c7" />
+    
+    <!-- Monstera Leaves (Abstract geometry) -->
+    <!-- Leaf 1 (Left) -->
+    <path d="M 30,90 Q 0,70 -10,40 Q 15,30 35,60 Z" fill="#2ecc71" />
+    <line x1="30" y1="90" x2="12" y2="50" stroke="#27ae60" stroke-width="2.5" />
+    <!-- Leaf 2 (Center) -->
+    <path d="M 40,90 Q 40,40 50,10 Q 70,40 50,75 Z" fill="#27ae60" />
+    <line x1="40" y1="90" x2="48" y2="40" stroke="#219653" stroke-width="2.5" />
+    <!-- Leaf 3 (Right) -->
+    <path d="M 50,90 Q 80,80 90,50 Q 75,35 60,65 Z" fill="#2ecc71" />
+    <line x1="50" y1="90" x2="70" y2="60" stroke="#27ae60" stroke-width="2.5" />
+  </g>
+</svg>

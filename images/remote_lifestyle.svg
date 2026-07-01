@@ -1,0 +1,74 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300" width="100%" height="100%">
+  <rect width="100%" height="100%" fill="#f5f6fa"/>
+  
+  <!-- Memphis grid pattern background (limited opacity) -->
+  <defs>
+    <pattern id="wfhGrid" width="30" height="30" patternUnits="userSpaceOnUse">
+      <circle cx="15" cy="15" r="1.5" fill="#dcdde1" />
+    </pattern>
+  </defs>
+  <rect width="100%" height="100%" fill="url(#wfhGrid)" />
+  
+  <!-- Monstera Plant (Left) -->
+  <g transform="translate(40, 80)">
+    <!-- Pot -->
+    <path d="M 20,120 L 60,120 L 52,170 L 28,170 Z" fill="#e67e22" />
+    <!-- Soil -->
+    <ellipse cx="40" cy="120" rx="20" ry="5" fill="#3e2723" />
+    
+    <!-- Leaves (Stylized Corporate Memphis style) -->
+    <!-- Leaf 1 -->
+    <path d="M 40,120 Q 20,80 15,50 Q 30,65 40,115" fill="#2ecc71" />
+    <circle cx="20" cy="75" r="3" fill="#f5f6fa"/>
+    <!-- Leaf 2 -->
+    <path d="M 40,120 Q 60,80 65,45 Q 50,65 40,115" fill="#27ae60" />
+    <circle cx="58" cy="70" r="3" fill="#f5f6fa"/>
+    <!-- Leaf 3 -->
+    <path d="M 40,120 Q 40,70 45,35 Q 35,65 40,115" fill="#2ecc71" />
+  </g>
+  
+  <!-- Desk surface line -->
+  <line x1="20" y1="250" x2="380" y2="250" stroke="#718093" stroke-width="6" stroke-linecap="round" />
+  
+  <!-- Laptop (Centered) -->
+  <g transform="translate(130, 130)">
+    <!-- Screen -->
+    <rect x="15" y="20" width="110" height="80" rx="6" fill="#2f3640" />
+    <rect x="20" y="25" width="100" height="70" rx="2" fill="#718093" />
+    <!-- Code lines on screen -->
+    <rect x="30" y="35" width="40" height="6" rx="2" fill="#f1c40f" />
+    <rect x="30" y="47" width="60" height="6" rx="2" fill="#9b59b6" />
+    <rect x="30" y="59" width="30" height="6" rx="2" fill="#2ecc71" />
+    <rect x="30" y="71" width="50" height="6" rx="2" fill="#e74c3c" />
+    <!-- Keyboard base -->
+    <polygon points="15,100 125,100 135,118 5,118" fill="#dcdde1" />
+    <rect x="15" y="100" width="110" height="18" fill="#bdc3c7" opacity="0.5" />
+    <!-- Trackpad -->
+    <rect x="55" y="110" width="30" height="6" rx="1" fill="#7f8c8d" />
+  </g>
+  
+  <!-- Sleeping Cat (Right on desk) -->
+  <g transform="translate(270, 190)">
+    <!-- Cat body (curled circle) -->
+    <circle cx="40" cy="45" r="22" fill="#f1c40f" />
+    <!-- Cat head -->
+    <circle cx="58" cy="35" r="12" fill="#f1c40f" />
+    <!-- Cat ears -->
+    <polygon points="50,26 56,18 58,26" fill="#e67e22" />
+    <polygon points="60,26 66,18 68,26" fill="#e67e22" />
+    <!-- Tail -->
+    <path d="M 20,53 C 15,58 10,50 15,45" stroke="#f1c40f" stroke-width="6" fill="none" stroke-linecap="round" />
+    <!-- Sleep Zs -->
+    <text x="65" y="15" font-family="monospace" font-size="10" fill="#7f8c8d">z</text>
+    <text x="73" y="8" font-family="monospace" font-size="14" fill="#7f8c8d">Z</text>
+  </g>
+  
+  <!-- Coffee Cup (Middle Left) -->
+  <g transform="translate(105, 215)">
+    <path d="M 5,5 L 25,5 L 22,30 L 8,30 Z" fill="#e74c3c" />
+    <!-- Handle -->
+    <path d="M 23,10 C 28,10 28,25 23,25" stroke="#e74c3c" stroke-width="3" fill="none" />
+    <!-- Steam -->
+    <path d="M 12,0 Q 15,-10 10,-15" fill="none" stroke="#718093" stroke-width="2" stroke-linecap="round" />
+  </g>
+</svg>

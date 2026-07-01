@@ -1,0 +1,1293 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Corporate Memphis Prompt Gallery</title>
+    
+    <!-- Google Fonts for Modern Typography -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500&family=Outfit:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --bg-color: #0a1118;
+            --bg-gradient: radial-gradient(circle at 50% 0%, #162431 0%, #0a1118 70%);
+            --card-bg: rgba(255, 255, 255, 0.03);
+            --card-border: rgba(255, 255, 255, 0.08);
+            --card-hover-border: rgba(26, 188, 156, 0.4);
+            
+            --text-main: #f3f4f6;
+            --text-muted: #9ca3af;
+            
+            --accent-teal: #1abc9c;
+            --accent-teal-glow: rgba(26, 188, 156, 0.25);
+            --accent-purple: #9b59b6;
+            --accent-green: #2ecc71;
+            --accent-orange: #e67e22;
+            --accent-yellow: #f1c40f;
+            
+            --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        /* Scrollbar Styling */
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: var(--bg-color);
+        }
+        ::-webkit-scrollbar-thumb {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--accent-teal);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Outfit', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            background: var(--bg-color);
+            background-image: var(--bg-gradient);
+            color: var(--text-main);
+            min-height: 100vh;
+            padding: 40px 20px;
+            overflow-x: hidden;
+        }
+
+        header {
+            text-align: center;
+            max-width: 700px;
+            margin: 0 auto 40px auto;
+            position: relative;
+        }
+
+        header h1 {
+            font-size: clamp(2rem, 5vw, 3rem);
+            font-weight: 700;
+            background: linear-gradient(135deg, #ffffff 30%, var(--accent-teal) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 12px;
+            letter-spacing: -0.02em;
+        }
+
+        header p {
+            font-size: clamp(1rem, 3vw, 1.25rem);
+            color: var(--text-muted);
+            line-height: 1.6;
+            margin-bottom: 30px;
+        }
+
+        /* Search & Filtering Area */
+        .controls-container {
+            max-width: 600px;
+            margin: 0 auto 40px auto;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            align-items: center;
+        }
+
+        .search-wrapper {
+            position: relative;
+            width: 100%;
+        }
+
+        .search-icon {
+            position: absolute;
+            left: 18px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 18px;
+            height: 18px;
+            color: var(--text-muted);
+            pointer-events: none;
+            transition: var(--transition-smooth);
+        }
+
+        .search-input {
+            width: 100%;
+            padding: 16px 20px 16px 50px;
+            background: rgba(255, 255, 255, 0.04);
+            border: 1.5px solid var(--card-border);
+            border-radius: 50px;
+            color: #fff;
+            font-family: inherit;
+            font-size: 1rem;
+            outline: none;
+            transition: var(--transition-smooth);
+            backdrop-filter: blur(8px);
+        }
+
+        .search-input:focus {
+            border-color: var(--accent-teal);
+            box-shadow: 0 0 20px var(--accent-teal-glow);
+            background: rgba(255, 255, 255, 0.08);
+        }
+
+        .search-input:focus + .search-icon {
+            color: var(--accent-teal);
+        }
+
+        .filter-tags {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 8px;
+            width: 100%;
+        }
+
+        .filter-tag {
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid var(--card-border);
+            color: var(--text-muted);
+            padding: 8px 16px;
+            border-radius: 30px;
+            font-size: 0.85rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: var(--transition-smooth);
+            user-select: none;
+        }
+
+        .filter-tag:hover {
+            color: #fff;
+            border-color: rgba(255, 255, 255, 0.25);
+            background: rgba(255, 255, 255, 0.08);
+        }
+
+        .filter-tag.active {
+            background: var(--accent-teal);
+            border-color: var(--accent-teal);
+            color: var(--bg-color);
+            font-weight: 600;
+            box-shadow: 0 4px 12px var(--accent-teal-glow);
+        }
+
+        /* Grid Layout */
+        .grid-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 30px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .card {
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-radius: 20px;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            backdrop-filter: blur(10px);
+            transition: var(--transition-smooth);
+        }
+
+        .card:hover {
+            transform: translateY(-8px);
+            border-color: var(--card-hover-border);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5), 0 0 20px rgba(26, 188, 156, 0.05);
+        }
+
+        .image-wrapper {
+            position: relative;
+            width: 100%;
+            padding-top: 75%; /* 4:3 Aspect Ratio matching generated images */
+            background: #0f161e;
+            overflow: hidden;
+            border-bottom: 1.5px solid var(--card-border);
+        }
+
+        .image-wrapper img {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .card:hover .image-wrapper img {
+            transform: scale(1.05);
+        }
+
+        .content {
+            padding: 24px;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        .card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+        }
+
+        .content h2 {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: #fff;
+            line-height: 1.4;
+        }
+
+        .index-badge {
+            background: rgba(255, 255, 255, 0.06);
+            color: var(--text-muted);
+            padding: 4px 10px;
+            border-radius: 8px;
+            font-family: 'Fira Code', monospace;
+            font-size: 0.75rem;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        /* Code/Text Box for Easy Copy Paste */
+        .prompt-container {
+            position: relative;
+            background: rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(255, 255, 255, 0.04);
+            border-radius: 12px;
+            overflow: hidden;
+            transition: var(--transition-smooth);
+        }
+
+        .prompt-container:hover {
+            border-color: rgba(255, 255, 255, 0.1);
+            background: rgba(0, 0, 0, 0.4);
+        }
+
+        .prompt-box {
+            width: 100%;
+            height: 110px;
+            background: transparent;
+            border: none;
+            resize: none;
+            padding: 16px 16px 40px 16px;
+            font-family: 'Fira Code', 'Courier New', monospace;
+            font-size: 0.85rem;
+            line-height: 1.6;
+            color: #e5e7eb;
+            outline: none;
+            overflow-y: auto;
+            cursor: text;
+        }
+
+        .prompt-meta {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 32px;
+            background: linear-gradient(to top, rgba(0,0,0,0.8) 40%, rgba(0,0,0,0));
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            padding: 0 16px 4px 16px;
+            pointer-events: none;
+        }
+
+        .prompt-meta span {
+            font-size: 0.7rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        /* Tag Pill Badges */
+        .tags-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+        }
+
+        .tag {
+            background: rgba(26, 188, 156, 0.08);
+            color: var(--accent-teal);
+            padding: 4px 10px;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 500;
+            letter-spacing: 0.01em;
+            border: 1px solid rgba(26, 188, 156, 0.15);
+        }
+
+        /* Action Buttons */
+        .card-actions {
+            margin-top: auto;
+            display: flex;
+            gap: 10px;
+        }
+
+        .copy-button {
+            flex-grow: 1;
+            background: linear-gradient(135deg, var(--accent-teal) 0%, #16a085 100%);
+            color: #07111a;
+            border: none;
+            padding: 14px;
+            border-radius: 12px;
+            font-family: inherit;
+            font-size: 0.95rem;
+            font-weight: 600;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            transition: var(--transition-smooth);
+            box-shadow: 0 4px 12px rgba(26, 188, 156, 0.15);
+        }
+
+        .copy-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px var(--accent-teal-glow);
+            filter: brightness(1.05);
+        }
+
+        .copy-button:active {
+            transform: translateY(0);
+        }
+
+        /* Success State for Button */
+        .copy-button.copied {
+            background: linear-gradient(135deg, var(--accent-green) 0%, #27ae60 100%);
+            color: #07111a;
+            box-shadow: 0 4px 12px rgba(46, 204, 113, 0.2);
+        }
+
+        /* No Results State */
+        .no-results {
+            grid-column: 1 / -1;
+            text-align: center;
+            padding: 60px 20px;
+            color: var(--text-muted);
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px dashed var(--card-border);
+            border-radius: 20px;
+        }
+
+        .no-results svg {
+            width: 48px;
+            height: 48px;
+            margin-bottom: 16px;
+            color: var(--text-muted);
+            opacity: 0.5;
+        }
+
+        .no-results p {
+            font-size: 1.1rem;
+        }
+
+        /* Toast Notification */
+        .toast-container {
+            position: fixed;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%) translateY(100px);
+            background: rgba(10, 17, 24, 0.95);
+            border: 1px solid var(--accent-teal);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5), 0 0 15px var(--accent-teal-glow);
+            padding: 16px 28px;
+            border-radius: 50px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            z-index: 1000;
+            opacity: 0;
+            transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), opacity 0.3s ease;
+            pointer-events: none;
+            backdrop-filter: blur(10px);
+        }
+
+        .toast-container.show {
+            transform: translateX(-50%) translateY(0);
+            opacity: 1;
+        }
+
+        .toast-icon {
+            color: var(--accent-teal);
+            width: 20px;
+            height: 20px;
+        }
+
+        .toast-text {
+            color: #fff;
+            font-size: 0.95rem;
+            font-weight: 500;
+        }
+
+        /* Mobile Adjustments */
+        @media (max-width: 600px) {
+            body {
+                padding: 20px 12px;
+            }
+            .grid-container {
+                gap: 20px;
+                grid-template-columns: 1fr;
+            }
+            .content {
+                padding: 20px;
+            }
+            .controls-container {
+                margin-bottom: 25px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>Corporate Memphis Prompts</h1>
+        <p>A hand-curated collection of 20 modern flat vector art templates. Ideal for tech startups, SaaS apps, contemporary UI designs, e-commerce, and physical markets.</p>
+    </header>
+
+    <div class="controls-container">
+        <!-- Search bar -->
+        <div class="search-wrapper">
+            <input type="text" id="searchBar" class="search-input" placeholder="Search templates, prompts, or tags...">
+            <svg class="search-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+            </svg>
+        </div>
+        
+        <!-- Tag filter Pills -->
+        <div class="filter-tags" id="tagFilters">
+            <span class="filter-tag active" data-tag="all">All</span>
+            <span class="filter-tag" data-tag="Teamwork">Teamwork</span>
+            <span class="filter-tag" data-tag="Data">Data</span>
+            <span class="filter-tag" data-tag="Support">Support</span>
+            <span class="filter-tag" data-tag="Communication">Communication</span>
+            <span class="filter-tag" data-tag="Logistics">Logistics</span>
+            <span class="filter-tag" data-tag="App">App</span>
+            <span class="filter-tag" data-tag="Engineering">Engineering</span>
+            <span class="filter-tag" data-tag="Tech">Tech</span>
+            <span class="filter-tag" data-tag="Medical">Medical</span>
+            <span class="filter-tag" data-tag="Care">Care</span>
+            <span class="filter-tag" data-tag="Shopping">Shopping</span>
+            <span class="filter-tag" data-tag="Fintech">Fintech</span>
+            <span class="filter-tag" data-tag="EdTech">EdTech</span>
+            <span class="filter-tag" data-tag="Learning">Learning</span>
+            <span class="filter-tag" data-tag="Analytics">Analytics</span>
+            <span class="filter-tag" data-tag="Business">Business</span>
+            <span class="filter-tag" data-tag="SaaS">SaaS</span>
+            <span class="filter-tag" data-tag="Cloud">Cloud</span>
+            <span class="filter-tag" data-tag="WFH">WFH</span>
+            <span class="filter-tag" data-tag="Lifestyle">Lifestyle</span>
+            <span class="filter-tag" data-tag="Market">Market</span>
+            <span class="filter-tag" data-tag="Eco">Eco</span>
+            <span class="filter-tag" data-tag="Social">Social</span>
+            <span class="filter-tag" data-tag="Retail">Retail</span>
+            <span class="filter-tag" data-tag="Food">Food</span>
+        </div>
+    </div>
+
+    <div class="grid-container" id="galleryGrid">
+        
+        <!-- Template 1 -->
+        <div class="card" data-tags="Teamwork,Data">
+            <div class="image-wrapper">
+                <img src="images/teamwork_milestone.jpg" alt="Startup Milestone" loading="lazy">
+            </div>
+            <div class="content">
+                <div class="card-header">
+                    <h2>1. The Startup Milestone</h2>
+                    <span class="index-badge">01</span>
+                </div>
+                <div class="prompt-container">
+                    <textarea class="prompt-box" readonly onclick="this.select()">"Corporate Memphis style flat vector illustration, top-down view of three diverse coworkers high-fiving over a central table. The table has a giant tablet showing a colorful pie chart. Vibrant teal background, pops of neon yellow and green, abstract geometric shapes, smooth gradients, clean lines."</textarea>
+                    <div class="prompt-meta">
+                        <span>Tap inside to select</span>
+                    </div>
+                </div>
+                <div class="tags-list">
+                    <span class="tag">Teamwork</span>
+                    <span class="tag">Data</span>
+                </div>
+                <div class="card-actions">
+                    <button class="copy-button" data-prompt='"Corporate Memphis style flat vector illustration, top-down view of three diverse coworkers high-fiving over a central table. The table has a giant tablet showing a colorful pie chart. Vibrant teal background, pops of neon yellow and green, abstract geometric shapes, smooth gradients, clean lines."'>
+                        <svg width="18" height="18" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-1M8 5a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 012-2h2a2 2 0 012 2m0 0h2a2 2 0 012 2v3m2 4H10m0 0l3-3m-3 3l3 3"></path>
+                        </svg>
+                        Copy Prompt
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Template 2 -->
+        <div class="card" data-tags="Support,Communication">
+            <div class="image-wrapper">
+                <img src="images/customer_support.jpg" alt="Customer Support" loading="lazy">
+            </div>
+            <div class="content">
+                <div class="card-header">
+                    <h2>2. Customer Support</h2>
+                    <span class="index-badge">02</span>
+                </div>
+                <div class="prompt-container">
+                    <textarea class="prompt-box" readonly onclick="this.select()">"Alegria style illustration of a stylized woman wearing a modern headset, typing on a sleek laptop. Floating semi-transparent chat bubbles and sparkle icons surround her. Solid deep blue background, lime green pants, bright abstract arches in the background, minimalist vector art."</textarea>
+                    <div class="prompt-meta">
+                        <span>Tap inside to select</span>
+                    </div>
+                </div>
+                <div class="tags-list">
+                    <span class="tag">Support</span>
+                    <span class="tag">Communication</span>
+                </div>
+                <div class="card-actions">
+                    <button class="copy-button" data-prompt='"Alegria style illustration of a stylized woman wearing a modern headset, typing on a sleek laptop. Floating semi-transparent chat bubbles and sparkle icons surround her. Solid deep blue background, lime green pants, bright abstract arches in the background, minimalist vector art."'>
+                        <svg width="18" height="18" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-1M8 5a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 012-2h2a2 2 0 012 2m0 0h2a2 2 0 012 2v3m2 4H10m0 0l3-3m-3 3l3 3"></path>
+                        </svg>
+                        Copy Prompt
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Template 3 -->
+        <div class="card" data-tags="Logistics,App">
+            <div class="image-wrapper">
+                <img src="images/speedy_delivery.jpg" alt="Speedy Delivery" loading="lazy">
+            </div>
+            <div class="content">
+                <div class="card-header">
+                    <h2>3. Speedy Delivery</h2>
+                    <span class="index-badge">03</span>
+                </div>
+                <div class="prompt-container">
+                    <textarea class="prompt-box" readonly onclick="this.select()">"Flat vector illustration in Corporate Memphis style of a stylized courier riding a modern electric scooter, carrying an oversized cardboard box. Action lines suggesting speed. Warm orange and yellow color palette, simple geometric city skyline in the background, no harsh shadows."</textarea>
+                    <div class="prompt-meta">
+                        <span>Tap inside to select</span>
+                    </div>
+                </div>
+                <div class="tags-list">
+                    <span class="tag">Logistics</span>
+                    <span class="tag">App</span>
+                </div>
+                <div class="card-actions">
+                    <button class="copy-button" data-prompt='"Flat vector illustration in Corporate Memphis style of a stylized courier riding a modern electric scooter, carrying an oversized cardboard box. Action lines suggesting speed. Warm orange and yellow color palette, simple geometric city skyline in the background, no harsh shadows."'>
+                        <svg width="18" height="18" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-1M8 5a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 012-2h2a2 2 0 012 2m0 0h2a2 2 0 012 2v3m2 4H10m0 0l3-3m-3 3l3 3"></path>
+                        </svg>
+                        Copy Prompt
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Template 4 -->
+        <div class="card" data-tags="Engineering,Tech">
+            <div class="image-wrapper">
+                <img src="images/the_coder.jpg" alt="The Coder" loading="lazy">
+            </div>
+            <div class="content">
+                <div class="card-header">
+                    <h2>4. The Coder</h2>
+                    <span class="index-badge">04</span>
+                </div>
+                <div class="prompt-container">
+                    <textarea class="prompt-box" readonly onclick="this.select()">"Tech illustration, Alegria style, side profile of a man with vibrant blue hair sitting at a minimalist desk coding on a laptop. Floating ones and zeros, abstract gears, and a coffee cup. High contrast colors, flat design, smooth sweeping lines, modern software development theme."</textarea>
+                    <div class="prompt-meta">
+                        <span>Tap inside to select</span>
+                    </div>
+                </div>
+                <div class="tags-list">
+                    <span class="tag">Engineering</span>
+                    <span class="tag">Tech</span>
+                </div>
+                <div class="card-actions">
+                    <button class="copy-button" data-prompt='"Tech illustration, Alegria style, side profile of a man with vibrant blue hair sitting at a minimalist desk coding on a laptop. Floating ones and zeros, abstract gears, and a coffee cup. High contrast colors, flat design, smooth sweeping lines, modern software development theme."'>
+                        <svg width="18" height="18" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-1M8 5a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 012-2h2a2 2 0 012 2m0 0h2a2 2 0 012 2v3m2 4H10m0 0l3-3m-3 3l3 3"></path>
+                        </svg>
+                        Copy Prompt
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Template 5 -->
+        <div class="card" data-tags="Medical,Care">
+            <div class="image-wrapper">
+                <img src="images/modern_healthcare.jpg" alt="Modern Healthcare" loading="lazy">
+            </div>
+            <div class="content">
+                <div class="card-header">
+                    <h2>5. Modern Healthcare</h2>
+                    <span class="index-badge">05</span>
+                </div>
+                <div class="prompt-container">
+                    <textarea class="prompt-box" readonly onclick="this.select()">"Corporate Memphis vector art of a diverse healthcare professional in scrubs holding a giant, stylized red heart icon. A stethoscope hangs around their neck. Soft pastel blue background, minimalist shapes, friendly and approachable tone, flat 2D illustration."</textarea>
+                    <div class="prompt-meta">
+                        <span>Tap inside to select</span>
+                    </div>
+                </div>
+                <div class="tags-list">
+                    <span class="tag">Medical</span>
+                    <span class="tag">Care</span>
+                </div>
+                <div class="card-actions">
+                    <button class="copy-button" data-prompt='"Corporate Memphis vector art of a diverse healthcare professional in scrubs holding a giant, stylized red heart icon. A stethoscope hangs around their neck. Soft pastel blue background, minimalist shapes, friendly and approachable tone, flat 2D illustration."'>
+                        <svg width="18" height="18" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-1M8 5a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 012-2h2a2 2 0 012 2m0 0h2a2 2 0 012 2v3m2 4H10m0 0l3-3m-3 3l3 3"></path>
+                        </svg>
+                        Copy Prompt
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Template 6 -->
+        <div class="card" data-tags="Shopping,Fintech">
+            <div class="image-wrapper">
+                <img src="images/mobile_ecommerce.svg" alt="Mobile E-Commerce" loading="lazy">
+            </div>
+            <div class="content">
+                <div class="card-header">
+                    <h2>6. Mobile E-Commerce</h2>
+                    <span class="index-badge">06</span>
+                </div>
+                <div class="prompt-container">
+                    <textarea class="prompt-box" readonly onclick="this.select()">"Flat vector graphic of a stylized person interacting with an oversized smartphone screen displaying a shopping cart. A giant floating credit card and shopping bags nearby. Corporate Memphis aesthetic, vibrant purple and teal color scheme, subtle gradients, abstract UI elements."</textarea>
+                    <div class="prompt-meta">
+                        <span>Tap inside to select</span>
+                    </div>
+                </div>
+                <div class="tags-list">
+                    <span class="tag">Shopping</span>
+                    <span class="tag">Fintech</span>
+                </div>
+                <div class="card-actions">
+                    <button class="copy-button" data-prompt='"Flat vector graphic of a stylized person interacting with an oversized smartphone screen displaying a shopping cart. A giant floating credit card and shopping bags nearby. Corporate Memphis aesthetic, vibrant purple and teal color scheme, subtle gradients, abstract UI elements."'>
+                        <svg width="18" height="18" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-1M8 5a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 012-2h2a2 2 0 012 2m0 0h2a2 2 0 012 2v3m2 4H10m0 0l3-3m-3 3l3 3"></path>
+                        </svg>
+                        Copy Prompt
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Template 7 -->
+        <div class="card" data-tags="EdTech,Learning">
+            <div class="image-wrapper">
+                <img src="images/online_education.svg" alt="Online Education" loading="lazy">
+            </div>
+            <div class="content">
+                <div class="card-header">
+                    <h2>7. Online Education</h2>
+                    <span class="index-badge">07</span>
+                </div>
+                <div class="prompt-container">
+                    <textarea class="prompt-box" readonly onclick="this.select()">"Alegria style illustration of a person casually sitting on a giant stack of colorful books while reading from a tablet. A stylized graduation cap floats nearby. Educational theme, bright yellow and coral pink colors, flat geometric shapes, modern ed-tech concept."</textarea>
+                    <div class="prompt-meta">
+                        <span>Tap inside to select</span>
+                    </div>
+                </div>
+                <div class="tags-list">
+                    <span class="tag">EdTech</span>
+                    <span class="tag">Learning</span>
+                </div>
+                <div class="card-actions">
+                    <button class="copy-button" data-prompt='"Alegria style illustration of a person casually sitting on a giant stack of colorful books while reading from a tablet. A stylized graduation cap floats nearby. Educational theme, bright yellow and coral pink colors, flat geometric shapes, modern ed-tech concept."'>
+                        <svg width="18" height="18" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-1M8 5a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 012-2h2a2 2 0 012 2m0 0h2a2 2 0 012 2v3m2 4H10m0 0l3-3m-3 3l3 3"></path>
+                        </svg>
+                        Copy Prompt
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Template 8 -->
+        <div class="card" data-tags="Analytics,Business">
+            <div class="image-wrapper">
+                <img src="images/data_analytics.svg" alt="Data Analytics" loading="lazy">
+            </div>
+            <div class="content">
+                <div class="card-header">
+                    <h2>8. Data Analytics</h2>
+                    <span class="index-badge">08</span>
+                </div>
+                <div class="prompt-container">
+                    <textarea class="prompt-box" readonly onclick="this.select()">"Corporate Memphis illustration of two stylized business people holding a giant magnifying glass over a large floating bar chart and line graph. Analyzing data concept. Clean vector lines, mint green and dark navy palette, abstract workplace setting, highly stylized proportions."</textarea>
+                    <div class="prompt-meta">
+                        <span>Tap inside to select</span>
+                    </div>
+                </div>
+                <div class="tags-list">
+                    <span class="tag">Analytics</span>
+                    <span class="tag">Business</span>
+                </div>
+                <div class="card-actions">
+                    <button class="copy-button" data-prompt='"Corporate Memphis illustration of two stylized business people holding a giant magnifying glass over a large floating bar chart and line graph. Analyzing data concept. Clean vector lines, mint green and dark navy palette, abstract workplace setting, highly stylized proportions."'>
+                        <svg width="18" height="18" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-1M8 5a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 012-2h2a2 2 0 012 2m0 0h2a2 2 0 012 2v3m2 4H10m0 0l3-3m-3 3l3 3"></path>
+                        </svg>
+                        Copy Prompt
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Template 9 -->
+        <div class="card" data-tags="SaaS,Cloud">
+            <div class="image-wrapper">
+                <img src="images/cloud_infrastructure.svg" alt="Cloud Infrastructure" loading="lazy">
+            </div>
+            <div class="content">
+                <div class="card-header">
+                    <h2>9. Cloud Infrastructure</h2>
+                    <span class="index-badge">09</span>
+                </div>
+                <div class="prompt-container">
+                    <textarea class="prompt-box" readonly onclick="this.select()">"Flat vector tech illustration, Alegria style, representing cloud computing. Stylized abstract servers, floating cloud icons, and glowing connection nodes. A tiny stylized figure managing the network. Deep blue background with cyan and magenta accents, geometric minimalism."</textarea>
+                    <div class="prompt-meta">
+                        <span>Tap inside to select</span>
+                    </div>
+                </div>
+                <div class="tags-list">
+                    <span class="tag">SaaS</span>
+                    <span class="tag">Cloud</span>
+                </div>
+                <div class="card-actions">
+                    <button class="copy-button" data-prompt='"Flat vector tech illustration, Alegria style, representing cloud computing. Stylized abstract servers, floating cloud icons, and glowing connection nodes. A tiny stylized figure managing the network. Deep blue background with cyan and magenta accents, geometric minimalism."'>
+                        <svg width="18" height="18" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-1M8 5a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 012-2h2a2 2 0 012 2m0 0h2a2 2 0 012 2v3m2 4H10m0 0l3-3m-3 3l3 3"></path>
+                        </svg>
+                        Copy Prompt
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Template 10 -->
+        <div class="card" data-tags="WFH,Lifestyle">
+            <div class="image-wrapper">
+                <img src="images/remote_lifestyle.svg" alt="Remote Work Lifestyle" loading="lazy">
+            </div>
+            <div class="content">
+                <div class="card-header">
+                    <h2>10. Remote Work Lifestyle</h2>
+                    <span class="index-badge">10</span>
+                </div>
+                <div class="prompt-container">
+                    <textarea class="prompt-box" readonly onclick="this.select()">"Corporate Memphis style illustration of a relaxed person working from home on a laptop. A stylized cat is sleeping on the minimalist desk next to a potted monstera plant. Cozy remote work theme, warm earth tones, flat vector art, simple dot-and-line facial features."</textarea>
+                    <div class="prompt-meta">
+                        <span>Tap inside to select</span>
+                    </div>
+                </div>
+                <div class="tags-list">
+                    <span class="tag">WFH</span>
+                    <span class="tag">Lifestyle</span>
+                </div>
+                <div class="card-actions">
+                    <button class="copy-button" data-prompt='"Corporate Memphis style illustration of a relaxed person working from home on a laptop. A stylized cat is sleeping on the minimalist desk next to a potted monstera plant. Cozy remote work theme, warm earth tones, flat vector art, simple dot-and-line facial features."'>
+                        <svg width="18" height="18" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-1M8 5a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 012-2h2a2 2 0 012 2m0 0h2a2 2 0 012 2v3m2 4H10m0 0l3-3m-3 3l3 3"></path>
+                        </svg>
+                        Copy Prompt
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Template 11 -->
+        <div class="card" data-tags="Shopping,Lifestyle,Market">
+            <div class="image-wrapper">
+                <img src="images/farmers_market.svg" alt="Farmers Market" loading="lazy">
+            </div>
+            <div class="content">
+                <div class="card-header">
+                    <h2>11. Farmers Market</h2>
+                    <span class="index-badge">11</span>
+                </div>
+                <div class="prompt-container">
+                    <textarea class="prompt-box" readonly onclick="this.select()">"Corporate Memphis style flat vector illustration of a customer selecting fresh red apples from a wooden crate at a farmer&#39;s market stall. Friendly vendor, hanging chalkboards, colorful overhead canvas, vibrant green and orange palette, clean minimalist shapes."</textarea>
+                    <div class="prompt-meta">
+                        <span>Tap inside to select</span>
+                    </div>
+                </div>
+                <div class="tags-list">
+                    <span class="tag">Shopping</span>
+                    <span class="tag">Lifestyle</span>
+                    <span class="tag">Market</span>
+                </div>
+                <div class="card-actions">
+                    <button class="copy-button" data-prompt='"Corporate Memphis style flat vector illustration of a customer selecting fresh red apples from a wooden crate at a farmer&#39;s market stall. Friendly vendor, hanging chalkboards, colorful overhead canvas, vibrant green and orange palette, clean minimalist shapes."'>
+                        <svg width="18" height="18" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-1M8 5a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 012-2h2a2 2 0 012 2m0 0h2a2 2 0 012 2v3m2 4H10m0 0l3-3m-3 3l3 3"></path>
+                        </svg>
+                        Copy Prompt
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Template 12 -->
+        <div class="card" data-tags="Shopping,Fintech,App">
+            <div class="image-wrapper">
+                <img src="images/smart_checkout.svg" alt="Smart Checkout Kiosk" loading="lazy">
+            </div>
+            <div class="content">
+                <div class="card-header">
+                    <h2>12. Smart Checkout Kiosk</h2>
+                    <span class="index-badge">12</span>
+                </div>
+                <div class="prompt-container">
+                    <textarea class="prompt-box" readonly onclick="this.select()">"Corporate Memphis style flat vector illustration of a stylized person scanning a product barcode using a smartphone. Floating shopping bags and virtual price tags. Sleek purple and yellow background, abstract grid pattern, clean flat vector art."</textarea>
+                    <div class="prompt-meta">
+                        <span>Tap inside to select</span>
+                    </div>
+                </div>
+                <div class="tags-list">
+                    <span class="tag">Shopping</span>
+                    <span class="tag">Fintech</span>
+                    <span class="tag">App</span>
+                </div>
+                <div class="card-actions">
+                    <button class="copy-button" data-prompt='"Corporate Memphis style flat vector illustration of a stylized person scanning a product barcode using a smartphone. Floating shopping bags and virtual price tags. Sleek purple and yellow background, abstract grid pattern, clean flat vector art."'>
+                        <svg width="18" height="18" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-1M8 5a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 012-2h2a2 2 0 012 2m0 0h2a2 2 0 012 2v3m2 4H10m0 0l3-3m-3 3l3 3"></path>
+                        </svg>
+                        Copy Prompt
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Template 13 -->
+        <div class="card" data-tags="Shopping,Tech,App">
+            <div class="image-wrapper">
+                <img src="images/virtual_shopping.svg" alt="VR Virtual Shopping" loading="lazy">
+            </div>
+            <div class="content">
+                <div class="card-header">
+                    <h2>13. VR Virtual Fitting Room</h2>
+                    <span class="index-badge">13</span>
+                </div>
+                <div class="prompt-container">
+                    <textarea class="prompt-box" readonly onclick="this.select()">"Corporate Memphis style flat vector illustration of a person wearing VR goggles, virtually swiping through clothing items floating in a 3D interface. Neon magenta and deep purple colors, abstract sparkles, sleek modern futuristic tech theme."</textarea>
+                    <div class="prompt-meta">
+                        <span>Tap inside to select</span>
+                    </div>
+                </div>
+                <div class="tags-list">
+                    <span class="tag">Shopping</span>
+                    <span class="tag">Tech</span>
+                    <span class="tag">App</span>
+                </div>
+                <div class="card-actions">
+                    <button class="copy-button" data-prompt='"Corporate Memphis style flat vector illustration of a person wearing VR goggles, virtually swiping through clothing items floating in a 3D interface. Neon magenta and deep purple colors, abstract sparkles, sleek modern futuristic tech theme."'>
+                        <svg width="18" height="18" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-1M8 5a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 012-2h2a2 2 0 012 2m0 0h2a2 2 0 012 2v3m2 4H10m0 0l3-3m-3 3l3 3"></path>
+                        </svg>
+                        Copy Prompt
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Template 14 -->
+        <div class="card" data-tags="Logistics,Business,SaaS">
+            <div class="image-wrapper">
+                <img src="images/warehouse_logistics.svg" alt="Warehouse Logistics" loading="lazy">
+            </div>
+            <div class="content">
+                <div class="card-header">
+                    <h2>14. Smart Warehouse Logistics</h2>
+                    <span class="index-badge">14</span>
+                </div>
+                <div class="prompt-container">
+                    <textarea class="prompt-box" readonly onclick="this.select()">"Corporate Memphis style flat vector illustration of warehouse workers scanning large packages with a tablet. A stylized forklift and tall shelves in the background. Bright blue and safety orange color scheme, clean lines, minimalist geometry."</textarea>
+                    <div class="prompt-meta">
+                        <span>Tap inside to select</span>
+                    </div>
+                </div>
+                <div class="tags-list">
+                    <span class="tag">Logistics</span>
+                    <span class="tag">Business</span>
+                    <span class="tag">SaaS</span>
+                </div>
+                <div class="card-actions">
+                    <button class="copy-button" data-prompt='"Corporate Memphis style flat vector illustration of warehouse workers scanning large packages with a tablet. A stylized forklift and tall shelves in the background. Bright blue and safety orange color scheme, clean lines, minimalist geometry."'>
+                        <svg width="18" height="18" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-1M8 5a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 012-2h2a2 2 0 012 2m0 0h2a2 2 0 012 2v3m2 4H10m0 0l3-3m-3 3l3 3"></path>
+                        </svg>
+                        Copy Prompt
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Template 15 -->
+        <div class="card" data-tags="Logistics,Lifestyle,Eco">
+            <div class="image-wrapper">
+                <img src="images/sustainable_delivery.svg" alt="Sustainable Last-Mile Delivery" loading="lazy">
+            </div>
+            <div class="content">
+                <div class="card-header">
+                    <h2>15. Eco-Friendly Delivery</h2>
+                    <span class="index-badge">15</span>
+                </div>
+                <div class="prompt-container">
+                    <textarea class="prompt-box" readonly onclick="this.select()">"Alegria style illustration of a green electric delivery truck driving past stylized wind turbines and trees, carrying cargo with leaf icons. Focus on green e-commerce and sustainability. Fresh green and teal tones, smooth curved lines, modern vector art."</textarea>
+                    <div class="prompt-meta">
+                        <span>Tap inside to select</span>
+                    </div>
+                </div>
+                <div class="tags-list">
+                    <span class="tag">Logistics</span>
+                    <span class="tag">Lifestyle</span>
+                    <span class="tag">Eco</span>
+                </div>
+                <div class="card-actions">
+                    <button class="copy-button" data-prompt='"Alegria style illustration of a green electric delivery truck driving past stylized wind turbines and trees, carrying cargo with leaf icons. Focus on green e-commerce and sustainability. Fresh green and teal tones, smooth curved lines, modern vector art."'>
+                        <svg width="18" height="18" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-1M8 5a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 012-2h2a2 2 0 012 2m0 0h2a2 2 0 012 2v3m2 4H10m0 0l3-3m-3 3l3 3"></path>
+                        </svg>
+                        Copy Prompt
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Template 16 -->
+        <div class="card" data-tags="Shopping,Communication,Social">
+            <div class="image-wrapper">
+                <img src="images/livestream_shopping.svg" alt="Social Live-Stream Selling" loading="lazy">
+            </div>
+            <div class="content">
+                <div class="card-header">
+                    <h2>16. Live Stream Commerce</h2>
+                    <span class="index-badge">16</span>
+                </div>
+                <div class="prompt-container">
+                    <textarea class="prompt-box" readonly onclick="this.select()">"Corporate Memphis style flat vector illustration of a cheerful content creator holding up a stylish shoe in front of a ring light, broadcasting a live shopping stream. Floating colorful hearts and buy buttons. Vibrant pink and electric blue background, modern digital marketing theme."</textarea>
+                    <div class="prompt-meta">
+                        <span>Tap inside to select</span>
+                    </div>
+                </div>
+                <div class="tags-list">
+                    <span class="tag">Shopping</span>
+                    <span class="tag">Communication</span>
+                    <span class="tag">Social</span>
+                </div>
+                <div class="card-actions">
+                    <button class="copy-button" data-prompt='"Corporate Memphis style flat vector illustration of a cheerful content creator holding up a stylish shoe in front of a ring light, broadcasting a live shopping stream. Floating colorful hearts and buy buttons. Vibrant pink and electric blue background, modern digital marketing theme."'>
+                        <svg width="18" height="18" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-1M8 5a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 012-2h2a2 2 0 012 2m0 0h2a2 2 0 012 2v3m2 4H10m0 0l3-3m-3 3l3 3"></path>
+                        </svg>
+                        Copy Prompt
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Template 17 -->
+        <div class="card" data-tags="Shopping,Lifestyle,Retail">
+            <div class="image-wrapper">
+                <img src="images/boutique_storefront.svg" alt="Physical Boutique Storefront" loading="lazy">
+            </div>
+            <div class="content">
+                <div class="card-header">
+                    <h2>17. Curated Shop Boutique</h2>
+                    <span class="index-badge">17</span>
+                </div>
+                <div class="prompt-container">
+                    <textarea class="prompt-box" readonly onclick="this.select()">"Corporate Memphis style flat vector illustration of a customer walking into a boutique with modern apparel on hangers and lush potted plants. Large glass window storefront. Flat design, warm terracotta and olive green color palette, cozy retail atmosphere."</textarea>
+                    <div class="prompt-meta">
+                        <span>Tap inside to select</span>
+                    </div>
+                </div>
+                <div class="tags-list">
+                    <span class="tag">Shopping</span>
+                    <span class="tag">Lifestyle</span>
+                    <span class="tag">Retail</span>
+                </div>
+                <div class="card-actions">
+                    <button class="copy-button" data-prompt='"Corporate Memphis style flat vector illustration of a customer walking into a boutique with modern apparel on hangers and lush potted plants. Large glass window storefront. Flat design, warm terracotta and olive green color palette, cozy retail atmosphere."'>
+                        <svg width="18" height="18" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-1M8 5a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 012-2h2a2 2 0 012 2m0 0h2a2 2 0 012 2v3m2 4H10m0 0l3-3m-3 3l3 3"></path>
+                        </svg>
+                        Copy Prompt
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Template 18 -->
+        <div class="card" data-tags="Analytics,Business,Fintech">
+            <div class="image-wrapper">
+                <img src="images/sales_analytics.svg" alt="Sales Analytics Dashboard" loading="lazy">
+            </div>
+            <div class="content">
+                <div class="card-header">
+                    <h2>18. E-Commerce Sales Analytics</h2>
+                    <span class="index-badge">18</span>
+                </div>
+                <div class="prompt-container">
+                    <textarea class="prompt-box" readonly onclick="this.select()">"Alegria style vector illustration of a small business owner looking at a giant, glowing dashboard filled with rising sales line charts and shipping globes. Warm orange and vibrant teal tones, modern fintech and sales analytics theme."</textarea>
+                    <div class="prompt-meta">
+                        <span>Tap inside to select</span>
+                    </div>
+                </div>
+                <div class="tags-list">
+                    <span class="tag">Analytics</span>
+                    <span class="tag">Business</span>
+                    <span class="tag">Fintech</span>
+                </div>
+                <div class="card-actions">
+                    <button class="copy-button" data-prompt='"Alegria style vector illustration of a small business owner looking at a giant, glowing dashboard filled with rising sales line charts and shipping globes. Warm orange and vibrant teal tones, modern fintech and sales analytics theme."'>
+                        <svg width="18" height="18" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-1M8 5a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 012-2h2a2 2 0 012 2m0 0h2a2 2 0 012 2v3m2 4H10m0 0l3-3m-3 3l3 3"></path>
+                        </svg>
+                        Copy Prompt
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Template 19 -->
+        <div class="card" data-tags="Lifestyle,Market,Food">
+            <div class="image-wrapper">
+                <img src="images/food_stall.svg" alt="Market Food Stall" loading="lazy">
+            </div>
+            <div class="content">
+                <div class="card-header">
+                    <h2>19. Street Food Market Stall</h2>
+                    <span class="index-badge">19</span>
+                </div>
+                <div class="prompt-container">
+                    <textarea class="prompt-box" readonly onclick="this.select()">"Corporate Memphis style flat vector illustration of a street food vendor preparing fresh tacos at a colorful outdoor market stall. A small queue of stylized customers. Warm sunset colors, playful abstract shapes, vibrant food festival atmosphere."</textarea>
+                    <div class="prompt-meta">
+                        <span>Tap inside to select</span>
+                    </div>
+                </div>
+                <div class="tags-list">
+                    <span class="tag">Lifestyle</span>
+                    <span class="tag">Market</span>
+                    <span class="tag">Food</span>
+                </div>
+                <div class="card-actions">
+                    <button class="copy-button" data-prompt='"Corporate Memphis style flat vector illustration of a street food vendor preparing fresh tacos at a colorful outdoor market stall. A small queue of stylized customers. Warm sunset colors, playful abstract shapes, vibrant food festival atmosphere."'>
+                        <svg width="18" height="18" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-1M8 5a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 012-2h2a2 2 0 012 2m0 0h2a2 2 0 012 2v3m2 4H10m0 0l3-3m-3 3l3 3"></path>
+                        </svg>
+                        Copy Prompt
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Template 20 -->
+        <div class="card" data-tags="Shopping,Lifestyle,Care">
+            <div class="image-wrapper">
+                <img src="images/unboxing_experience.svg" alt="Unboxing Experience" loading="lazy">
+            </div>
+            <div class="content">
+                <div class="card-header">
+                    <h2>20. Customer Unboxing Experience</h2>
+                    <span class="index-badge">20</span>
+                </div>
+                <div class="prompt-container">
+                    <textarea class="prompt-box" readonly onclick="this.select()">"Corporate Memphis style flat vector illustration of a person sitting on a rug, joyfully opening a large cardboard package with stars and thumbs-up icons floating out. Soft pastel peach background, simple flat shapes, cozy retail customer experience."</textarea>
+                    <div class="prompt-meta">
+                        <span>Tap inside to select</span>
+                    </div>
+                </div>
+                <div class="tags-list">
+                    <span class="tag">Shopping</span>
+                    <span class="tag">Lifestyle</span>
+                    <span class="tag">Care</span>
+                </div>
+                <div class="card-actions">
+                    <button class="copy-button" data-prompt='"Corporate Memphis style flat vector illustration of a person sitting on a rug, joyfully opening a large cardboard package with stars and thumbs-up icons floating out. Soft pastel peach background, simple flat shapes, cozy retail customer experience."'>
+                        <svg width="18" height="18" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-1M8 5a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 012-2h2a2 2 0 012 2m0 0h2a2 2 0 012 2v3m2 4H10m0 0l3-3m-3 3l3 3"></path>
+                        </svg>
+                        Copy Prompt
+                    </button>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Toast Notification Element -->
+    <div id="toast" class="toast-container">
+        <svg class="toast-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path>
+        </svg>
+        <span class="toast-text" id="toastText">Prompt copied to clipboard!</span>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const searchBar = document.getElementById('searchBar');
+            const tagFilters = document.getElementById('tagFilters');
+            const galleryGrid = document.getElementById('galleryGrid');
+            const cards = Array.from(galleryGrid.getElementsByClassName('card'));
+            const toast = document.getElementById('toast');
+            const toastText = document.getElementById('toastText');
+            
+            let activeTag = 'all';
+            let searchQuery = '';
+
+            // Handle Search & Filter logic together
+            function filterGallery() {
+                let matchesCount = 0;
+                
+                cards.forEach(card => {
+                    const title = card.querySelector('h2').textContent.toLowerCase();
+                    const prompt = card.querySelector('.prompt-box').value.toLowerCase();
+                    const tagsAttr = card.getAttribute('data-tags') || '';
+                    const tagsArray = tagsAttr.split(',').map(t => t.trim().toLowerCase());
+                    
+                    const matchesSearch = title.includes(searchQuery) || prompt.includes(searchQuery) || tagsAttr.toLowerCase().includes(searchQuery);
+                    const matchesTag = activeTag === 'all' || tagsArray.includes(activeTag.toLowerCase());
+
+                    if (matchesSearch && matchesTag) {
+                        card.style.display = 'flex';
+                        matchesCount++;
+                    } else {
+                        card.style.display = 'none';
+                    }
+                });
+
+                // Handle no results state
+                const existingNoResults = document.querySelector('.no-results');
+                if (matchesCount === 0) {
+                    if (!existingNoResults) {
+                        const noResultsEl = document.createElement('div');
+                        noResultsEl.className = 'no-results';
+                        noResultsEl.innerHTML = `
+                            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.172 16.172a4 4 0 015.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                            </svg>
+                            <p>No matching prompt templates found.</p>
+                        `;
+                        galleryGrid.appendChild(noResultsEl);
+                    }
+                } else {
+                    if (existingNoResults) {
+                        existingNoResults.remove();
+                    }
+                }
+            }
+
+            // Search event
+            searchBar.addEventListener('input', (e) => {
+                searchQuery = e.target.value.toLowerCase().trim();
+                filterGallery();
+            });
+
+            // Tag filter click events
+            tagFilters.addEventListener('click', (e) => {
+                if (e.target.classList.contains('filter-tag')) {
+                    // Update active class
+                    tagFilters.querySelector('.filter-tag.active').classList.remove('active');
+                    e.target.classList.add('active');
+
+                    activeTag = e.target.getAttribute('data-tag');
+                    filterGallery();
+                }
+            });
+
+            // Toast notification trigger
+            function showToast(message) {
+                toastText.textContent = message;
+                toast.classList.add('show');
+                
+                setTimeout(() => {
+                    toast.classList.remove('show');
+                }, 2500);
+            }
+
+            // Clipboard Copy functionality with fallback support
+            document.querySelectorAll('.copy-button').forEach(button => {
+                button.addEventListener('click', () => {
+                    // Clean prompt (remove surrounding quotes if present)
+                    let promptText = button.getAttribute('data-prompt');
+                    if (promptText.startsWith('"') && promptText.endsWith('"')) {
+                        promptText = promptText.substring(1, promptText.length - 1);
+                    }
+
+                    // Modern navigator.clipboard API
+                    if (navigator.clipboard && window.isSecureContext) {
+                        navigator.clipboard.writeText(promptText)
+                            .then(() => handleCopySuccess(button))
+                            .catch(err => {
+                                console.error('Clipboard copy failed: ', err);
+                                fallbackCopy(promptText, button);
+                            });
+                    } else {
+                        // Fallback method
+                        fallbackCopy(promptText, button);
+                    }
+                });
+            });
+
+            function fallbackCopy(text, button) {
+                try {
+                    const tempTextarea = document.createElement('textarea');
+                    tempTextarea.value = text;
+                    // Prevent zooming or page scrolling in mobile
+                    tempTextarea.style.position = 'fixed';
+                    tempTextarea.style.top = '0';
+                    tempTextarea.style.left = '0';
+                    tempTextarea.style.opacity = '0';
+                    document.body.appendChild(tempTextarea);
+                    
+                    tempTextarea.focus();
+                    tempTextarea.select();
+                    
+                    const successful = document.execCommand('copy');
+                    document.body.removeChild(tempTextarea);
+                    
+                    if (successful) {
+                        handleCopySuccess(button);
+                    } else {
+                        showToast('Copy failed. Please manually select the text.');
+                    }
+                } catch (err) {
+                    console.error('Fallback copy failed: ', err);
+                    showToast('Copy failed. Please manually select the text.');
+                }
+            }
+
+            function handleCopySuccess(button) {
+                // Success styling changes
+                button.classList.add('copied');
+                const originalContent = button.innerHTML;
+                
+                button.innerHTML = `
+                    <svg width="18" height="18" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path>
+                    </svg>
+                    Copied!
+                `;
+
+                showToast('Prompt copied to clipboard!');
+
+                setTimeout(() => {
+                    button.classList.remove('copied');
+                    button.innerHTML = originalContent;
+                }, 2000);
+            }
+        });
+    </script>
+</body>
+</html>

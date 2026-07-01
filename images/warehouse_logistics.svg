@@ -1,0 +1,52 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300" width="100%" height="100%">
+  <rect width="100%" height="100%" fill="#1a1c24"/>
+  <!-- Decorative Background Elements -->
+  <circle cx="320" cy="80" r="60" fill="#2d3748" opacity="0.3" />
+  
+  <!-- High Warehouse Shelves -->
+  <g stroke="#34495e" stroke-width="3">
+    <line x1="40" y1="50" x2="40" y2="260" />
+    <line x1="160" y1="50" x2="160" y2="260" />
+    <line x1="40" y1="120" x2="160" y2="120" />
+    <line x1="40" y1="190" x2="160" y2="190" />
+    <line x1="40" y1="260" x2="160" y2="260" />
+  </g>
+  
+  <!-- Boxes on Shelves (Brown, Orange cardboard style) -->
+  <rect x="50" y="70" width="40" height="45" rx="3" fill="#d35400" />
+  <rect x="95" y="80" width="55" height="35" rx="3" fill="#e67e22" />
+  <!-- Tape on boxes -->
+  <rect x="68" y="70" width="4" height="45" fill="#f1c40f" opacity="0.6" />
+  <rect x="120" y="80" width="4" height="35" fill="#f1c40f" opacity="0.6" />
+  
+  <rect x="55" y="145" width="85" height="40" rx="3" fill="#d35400" />
+  <rect x="90" y="145" width="4" height="40" fill="#f1c40f" opacity="0.6" />
+  
+  <!-- Stylized Warehouse Forklift (Background / Right side) -->
+  <g transform="translate(220, 160)">
+    <!-- Wheels -->
+    <circle cx="30" cy="85" r="15" fill="#2c3e50" stroke="#7f8c8d" stroke-width="3" />
+    <circle cx="95" cy="85" r="15" fill="#2c3e50" stroke="#7f8c8d" stroke-width="3" />
+    <!-- Chassis -->
+    <path d="M 10,80 L 110,80 L 110,50 Q 80,45 60,50 L 20,50 Z" fill="#f1c40f" />
+    <!-- Mast & Fork (Forks holding a box) -->
+    <line x1="15" y1="90" x2="15" y2="20" stroke="#7f8c8d" stroke-width="5" />
+    <path d="M 15,65 L -10,65 L -10,75" stroke="#7f8c8d" stroke-width="4" fill="none" />
+    <rect x="-10" y="25" width="22" height="35" rx="2" fill="#e67e22" />
+  </g>
+  
+  <!-- Foregound Worker holding tablet (Huge arms, Alegria style) -->
+  <g transform="translate(140, 90)">
+    <!-- Worker Body/Clothes -->
+    <path d="M 30,210 Q 50,130 90,140 Q 110,145 95,210 Z" fill="#2980b9" />
+    <!-- Arm reaching to tablet -->
+    <path d="M 40,150 Q 0,165 -20,130 L -15,120 Q 0,145 35,140 Z" fill="#e74c3c" />
+    <!-- Hand & Tablet -->
+    <rect x="-40" y="100" width="30" height="45" rx="3" fill="#1abc9c" stroke="#2c3e50" stroke-width="2" transform="rotate(15 -25 122)" />
+    <!-- Glowing screen content -->
+    <rect x="-35" y="107" width="20" height="30" fill="#ffffff" opacity="0.8" transform="rotate(15 -25 122)" />
+    <line x1="-30" y1="115" x2="-20" y2="120" stroke="#2980b9" stroke-width="2" />
+    <line x1="-28" y1="125" x2="-18" y2="130" stroke="#2980b9" stroke-width="2" />
+  </g>
+  
+</svg>

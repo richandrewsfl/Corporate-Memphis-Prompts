@@ -1,0 +1,64 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300" width="100%" height="100%">
+  <rect width="100%" height="100%" fill="#1a1c24"/>
+  <!-- Decorative background elements -->
+  <circle cx="80" cy="80" r="50" fill="#2d3748" opacity="0.3" />
+  <circle cx="340" cy="220" r="60" fill="#a0aec0" opacity="0.1" />
+  
+  <!-- Tripod & Ring Light (Center-Left) -->
+  <g transform="translate(90, 60)">
+    <!-- Tripod legs -->
+    <line x1="50" y1="90" x2="20" y2="210" stroke="#7f8c8d" stroke-width="3" />
+    <line x1="50" y1="90" x2="80" y2="210" stroke="#7f8c8d" stroke-width="3" />
+    <line x1="50" y1="90" x2="50" y2="210" stroke="#95a5a6" stroke-width="4" />
+    
+    <!-- Phone mount inside ring light -->
+    <rect x="42" y="55" width="16" height="30" rx="3" fill="#2c3e50" stroke="#bdc3c7" stroke-width="1.5" />
+    <!-- Phone screen camera lens -->
+    <circle cx="50" cy="60" r="2" fill="#e74c3c" />
+    
+    <!-- Ring light outer ring (White glow) -->
+    <circle cx="50" cy="50" r="45" fill="none" stroke="#ffffff" stroke-width="10" />
+    <!-- Yellow warmth ring -->
+    <circle cx="50" cy="50" r="41" fill="none" stroke="#f1c40f" stroke-width="2" opacity="0.8" />
+  </g>
+  
+  <!-- Stylized Presenter's Hand holding a Sneaker (Center-Right) -->
+  <g transform="translate(200, 70)">
+    <!-- Arm coming from the right -->
+    <path d="M 200,160 Q 150,150 110,135 L 115,120 Q 150,135 200,130 Z" fill="#9b59b6" />
+    <!-- Hand -->
+    <path d="M 110,135 C 100,135 90,125 95,115 C 100,105 110,110 115,120" fill="#ff7675" />
+    
+    <!-- Orange Sneaker (Product being showcased) -->
+    <g transform="translate(50, 40) rotate(-15)">
+      <!-- Sneaker body -->
+      <path d="M 10,40 C 10,20 30,10 55,10 C 80,10 90,30 110,30 L 110,60 L 10,60 Z" fill="#e67e22" />
+      <!-- Sole -->
+      <path d="M 10,60 L 110,60 L 110,68 L 10,68 Z" fill="#ffffff" />
+      <!-- Star / Brand logo -->
+      <path d="M 60,35 L 62,41 L 68,41 L 63,45 L 65,51 L 60,47 L 55,51 L 57,45 L 52,41 L 58,41 Z" fill="#ffffff" />
+    </g>
+  </g>
+  
+  <!-- Floating Hearts, Likes and Chat Bubbles (Interactive stream feedback) -->
+  <!-- Red Heart 1 -->
+  <path d="M 250,60 C 245,50 230,50 230,65 C 230,80 250,95 250,95 C 250,95 270,80 270,65 C 270,50 255,50 250,60 Z" fill="#e74c3c" transform="scale(0.7) translate(100, 10)" />
+  <!-- Red Heart 2 (Smaller, floating higher) -->
+  <path d="M 250,60 C 245,50 230,50 230,65 C 230,80 250,95 250,95 C 250,95 270,80 270,65 C 270,50 255,50 250,60 Z" fill="#e74c3c" transform="scale(0.5) translate(220, -40)" />
+  
+  <!-- Thumbs Up Like -->
+  <g transform="translate(290, 90) scale(0.8)">
+    <circle cx="15" cy="15" r="18" fill="#2980b9" />
+    <!-- Simple Hand vector representation -->
+    <path d="M 10,20 L 10,12 L 15,12 L 15,5 Q 18,5 20,8 L 18,12 L 23,12 Q 25,12 25,15 L 20,20 Z" fill="#ffffff" />
+  </g>
+  
+  <!-- Chat Bubble -->
+  <g transform="translate(180, 190)">
+    <rect x="0" y="0" width="110" height="40" rx="10" fill="#ffffff" opacity="0.9" />
+    <polygon points="20,40 30,40 25,48" fill="#ffffff" opacity="0.9" />
+    <!-- Abstract text lines -->
+    <line x1="15" y1="15" x2="95" y2="15" stroke="#2c3e50" stroke-width="3" stroke-linecap="round" />
+    <line x1="15" y1="25" x2="65" y2="25" stroke="#2c3e50" stroke-width="3" stroke-linecap="round" />
+  </g>
+</svg>

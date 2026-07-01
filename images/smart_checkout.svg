@@ -1,0 +1,55 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300" width="100%" height="100%">
+  <rect width="100%" height="100%" fill="#1a1c24"/>
+  <!-- Decorative Background Shapes -->
+  <circle cx="80" cy="220" r="60" fill="#2d3748" opacity="0.3" />
+  <path d="M 330,50 L 350,80 L 310,80 Z" fill="#9b59b6" opacity="0.4" />
+  
+  <!-- Cereal / Product Box (Target of scan) -->
+  <g transform="translate(60, 80)">
+    <rect x="0" y="0" width="110" height="150" rx="8" fill="#e67e22" />
+    <rect x="10" y="10" width="90" height="40" rx="4" fill="#f1c40f" />
+    <circle cx="55" cy="90" r="25" fill="#ffffff" opacity="0.9" />
+    <!-- Mini star/burst inside circle -->
+    <path d="M 55,75 L 58,85 L 68,85 L 60,91 L 63,101 L 55,95 L 47,101 L 50,91 L 42,85 L 52,85 Z" fill="#e67e22" />
+    
+    <!-- Barcode at the bottom -->
+    <rect x="25" y="125" width="60" height="15" fill="#ffffff" />
+    <!-- Barcode stripes -->
+    <line x1="30" y1="125" x2="30" y2="140" stroke="#000000" stroke-width="2" />
+    <line x1="34" y1="125" x2="34" y2="140" stroke="#000000" stroke-width="1" />
+    <line x1="38" y1="125" x2="38" y2="140" stroke="#000000" stroke-width="3" />
+    <line x1="44" y1="125" x2="44" y2="140" stroke="#000000" stroke-width="1" />
+    <line x1="48" y1="125" x2="48" y2="140" stroke="#000000" stroke-width="2" />
+    <line x1="54" y1="125" x2="54" y2="140" stroke="#000000" stroke-width="3" />
+    <line x1="60" y1="125" x2="60" y2="140" stroke="#000000" stroke-width="1" />
+    <line x1="64" y1="125" x2="64" y2="140" stroke="#000000" stroke-width="2" />
+    <line x1="70" y1="125" x2="70" y2="140" stroke="#000000" stroke-width="4" />
+    <line x1="78" y1="125" x2="78" y2="140" stroke="#000000" stroke-width="1" />
+  </g>
+  
+  <!-- Stylized arm and hand holding smartphone -->
+  <path d="M 400,240 Q 320,220 270,245 L 285,260 Q 330,240 400,270 Z" fill="#2ecc71" />
+  
+  <!-- Smartphone -->
+  <g transform="translate(210, 80) rotate(-10)">
+    <rect x="0" y="0" width="85" height="160" rx="12" fill="#34495e" stroke="#2c3e50" stroke-width="3" />
+    <rect x="6" y="10" width="73" height="140" rx="6" fill="#ffffff" />
+    
+    <!-- Phone screen content showing scan viewfinder -->
+    <rect x="12" y="30" width="61" height="80" rx="4" fill="#000000" opacity="0.05" />
+    <!-- Viewfinder corners -->
+    <path d="M 17,40 L 17,35 L 22,35 M 68,40 L 68,35 L 63,35 M 17,100 L 17,105 L 22,105 M 68,100 L 68,105 L 63,105" stroke="#1abc9c" stroke-width="2" fill="none" />
+    
+    <!-- Success checkmark on screen -->
+    <circle cx="42" cy="70" r="14" fill="#2ecc71" />
+    <path d="M 37,70 L 40,73 L 47,66" stroke="#ffffff" stroke-width="2" fill="none" stroke-linecap="round" />
+  </g>
+  
+  <!-- Glowing Scan Laser Line (Vibrant Red) -->
+  <line x1="120" y1="170" x2="230" y2="150" stroke="#ff7675" stroke-width="3" stroke-linecap="round" opacity="0.9" />
+  <!-- Laser Glow -->
+  <line x1="110" y1="171" x2="240" y2="149" stroke="#ff7675" stroke-width="8" stroke-linecap="round" opacity="0.3" />
+  
+  <!-- Sparkles -->
+  <path d="M 190,50 L 194,45 L 190,40 L 186,45 Z" fill="#ffd700" />
+</svg>

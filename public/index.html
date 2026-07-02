@@ -427,6 +427,203 @@
             font-weight: 500;
         }
 
+        /* Settings button, modal, generating states */
+        .settings-btn {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid var(--card-border);
+            color: var(--text-main);
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            z-index: 100;
+            backdrop-filter: blur(8px);
+            transition: var(--transition-smooth);
+        }
+        .settings-btn:hover {
+            border-color: var(--accent-teal);
+            box-shadow: 0 0 15px var(--accent-teal-glow);
+            transform: rotate(45deg);
+        }
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(10, 17, 24, 0.85);
+            backdrop-filter: blur(12px);
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            pointer-events: none;
+            transition: var(--transition-smooth);
+        }
+        .modal-overlay.show {
+            opacity: 1;
+            pointer-events: auto;
+        }
+        .modal-content {
+            background: rgba(22, 36, 49, 0.95);
+            border: 1.5px solid var(--card-border);
+            border-radius: 24px;
+            padding: 32px;
+            width: 90%;
+            max-width: 480px;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.8), 0 0 30px var(--accent-teal-glow);
+            transform: scale(0.9);
+            transition: var(--transition-smooth);
+        }
+        .modal-overlay.show .modal-content {
+            transform: scale(1);
+        }
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 24px;
+        }
+        .modal-header h3 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #fff;
+        }
+        .close-btn {
+            background: transparent;
+            border: none;
+            color: var(--text-muted);
+            cursor: pointer;
+            font-size: 1.8rem;
+            line-height: 1;
+            transition: var(--transition-smooth);
+        }
+        .close-btn:hover {
+            color: var(--accent-teal);
+        }
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            margin-bottom: 20px;
+        }
+        .form-group label {
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: var(--text-muted);
+        }
+        .form-input {
+            background: rgba(0, 0, 0, 0.25);
+            border: 1px solid var(--card-border);
+            border-radius: 12px;
+            padding: 12px 16px;
+            color: #fff;
+            font-family: inherit;
+            font-size: 0.95rem;
+            outline: none;
+            transition: var(--transition-smooth);
+        }
+        .form-input:focus {
+            border-color: var(--accent-teal);
+            box-shadow: 0 0 10px var(--accent-teal-glow);
+        }
+        .form-select {
+            background: #111b24;
+            border: 1px solid var(--card-border);
+            border-radius: 12px;
+            padding: 12px 16px;
+            color: #fff;
+            font-family: inherit;
+            font-size: 0.95rem;
+            outline: none;
+            transition: var(--transition-smooth);
+            cursor: pointer;
+        }
+        .form-select:focus {
+            border-color: var(--accent-teal);
+        }
+        .save-settings-btn {
+            width: 100%;
+            background: linear-gradient(135deg, var(--accent-teal) 0%, #16a085 100%);
+            color: #07111a;
+            border: none;
+            padding: 14px;
+            border-radius: 12px;
+            font-family: inherit;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition-smooth);
+        }
+        .save-settings-btn:hover {
+            filter: brightness(1.05);
+            box-shadow: 0 4px 15px var(--accent-teal-glow);
+        }
+        .generate-preview-btn {
+            flex-grow: 1;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid var(--card-border);
+            color: var(--text-main);
+            padding: 14px 8px;
+            border-radius: 12px;
+            font-family: inherit;
+            font-size: 0.85rem;
+            font-weight: 600;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+            transition: var(--transition-smooth);
+        }
+        .generate-preview-btn:hover {
+            background: rgba(255, 255, 255, 0.1);
+            border-color: var(--accent-teal);
+            box-shadow: 0 4px 12px var(--accent-teal-glow);
+        }
+        .image-wrapper.generating::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(10, 17, 24, 0.85);
+            z-index: 10;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .image-wrapper.generating::before {
+            content: 'Generating...';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: var(--accent-teal);
+            font-size: 0.95rem;
+            font-weight: 600;
+            z-index: 11;
+            animation: pulse 1.5s infinite ease-in-out;
+        }
+        @keyframes pulse {
+            0%, 100% { opacity: 0.6; }
+            50% { opacity: 1; }
+        }
+
+        /* Adjustments for smaller copy / gen layout */
+        .copy-button {
+            padding: 14px 8px;
+            font-size: 0.85rem;
+        }
+
         /* Mobile Adjustments */
         @media (max-width: 600px) {
             body {
@@ -1126,6 +1323,42 @@
 
     </div>
 
+    <!-- Settings Button (Gear Icon) -->
+    <button id="settingsBtn" class="settings-btn" title="OpenRouter Settings">
+        <svg width="22" height="22" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"></path>
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
+        </svg>
+    </button>
+
+    <!-- OpenRouter Settings Modal -->
+    <div id="settingsModal" class="modal-overlay">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>OpenRouter Configuration</h3>
+                <button id="closeModal" class="close-btn" title="Close">&times;</button>
+            </div>
+            <div class="form-group">
+                <label for="apiKeyInput">OpenRouter API Key:</label>
+                <input type="password" id="apiKeyInput" class="form-input" placeholder="sk-or-v1-...">
+            </div>
+            <div class="form-group">
+                <label for="modelSelect">Preset Image Model:</label>
+                <select id="modelSelect" class="form-select">
+                    <option value="google/gemini-3.1-flash-image:free">Google: Gemini 3.1 Flash Image (Free)</option>
+                    <option value="stabilityai/stable-diffusion-xl">Stability: Stable Diffusion XL</option>
+                    <option value="black-forest-labs/flux-schnell">Black Forest Labs: FLUX Schnell</option>
+                    <option value="bytedance/seedream-4.5">ByteDance: Seedream 4.5</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="modelInput">Or custom model slug:</label>
+                <input type="text" id="modelInput" class="form-input" placeholder="e.g. stabilityai/flux-dev">
+            </div>
+            <button id="saveSettingsBtn" class="save-settings-btn">Save Settings</button>
+        </div>
+    </div>
+
     <!-- Toast Notification Element -->
     <div id="toast" class="toast-container">
         <svg class="toast-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
@@ -1286,6 +1519,153 @@
                     button.classList.remove('copied');
                     button.innerHTML = originalContent;
                 }, 2000);
+            }
+
+            // --- OpenRouter Image Generation Integration ---
+            let openRouterKey = localStorage.getItem('openRouterKey') || '';
+            let openRouterModel = localStorage.getItem('openRouterModel') || 'google/gemini-3.1-flash-image:free';
+
+            const settingsBtn = document.getElementById('settingsBtn');
+            const settingsModal = document.getElementById('settingsModal');
+            const closeModal = document.getElementById('closeModal');
+            const apiKeyInput = document.getElementById('apiKeyInput');
+            const modelSelect = document.getElementById('modelSelect');
+            const modelInput = document.getElementById('modelInput');
+            const saveSettingsBtn = document.getElementById('saveSettingsBtn');
+
+            // Set initial state from localStorage
+            apiKeyInput.value = openRouterKey;
+            
+            // Check if user has saved a model slug not in presets
+            const presetValues = Array.from(modelSelect.options).map(opt => opt.value);
+            if (presetValues.includes(openRouterModel)) {
+                modelSelect.value = openRouterModel;
+                modelInput.value = '';
+            } else {
+                modelSelect.value = '';
+                modelInput.value = openRouterModel;
+            }
+
+            // Modal Toggles
+            settingsBtn.addEventListener('click', () => {
+                settingsModal.classList.add('show');
+            });
+            closeModal.addEventListener('click', () => {
+                settingsModal.classList.remove('show');
+            });
+            settingsModal.addEventListener('click', (e) => {
+                if (e.target === settingsModal) {
+                    settingsModal.classList.remove('show');
+                }
+            });
+
+            // Handle presets select vs manual custom inputs
+            modelSelect.addEventListener('change', () => {
+                if (modelSelect.value !== '') {
+                    modelInput.value = '';
+                }
+            });
+            modelInput.addEventListener('input', () => {
+                if (modelInput.value.trim() !== '') {
+                    modelSelect.value = '';
+                }
+            });
+
+            // Save Settings
+            saveSettingsBtn.addEventListener('click', () => {
+                openRouterKey = apiKeyInput.value.trim();
+                const selectedModel = modelSelect.value;
+                const manualModel = modelInput.value.trim();
+                openRouterModel = manualModel || selectedModel || 'google/gemini-3.1-flash-image:free';
+
+                localStorage.setItem('openRouterKey', openRouterKey);
+                localStorage.setItem('openRouterModel', openRouterModel);
+
+                settingsModal.classList.remove('show');
+                showToast('Settings saved!');
+            });
+
+            // Inject the "Generate Preview" button next to each Copy button dynamically
+            cards.forEach(card => {
+                const actionsDiv = card.querySelector('.card-actions');
+                if (actionsDiv) {
+                    const genButton = document.createElement('button');
+                    genButton.className = 'generate-preview-btn';
+                    genButton.innerHTML = `
+                        <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
+                        </svg>
+                        Generate Preview
+                    `;
+                    actionsDiv.appendChild(genButton);
+
+                    genButton.addEventListener('click', () => {
+                        triggerOpenRouterGeneration(card);
+                    });
+                }
+            });
+
+            async function triggerOpenRouterGeneration(card) {
+                if (!openRouterKey) {
+                    showToast('Please set your OpenRouter Key first!');
+                    settingsModal.classList.add('show');
+                    return;
+                }
+
+                const promptBox = card.querySelector('.prompt-box');
+                let promptText = promptBox.value;
+                if (promptText.startsWith('"') && promptText.endsWith('"')) {
+                    promptText = promptText.substring(1, promptText.length - 1);
+                }
+
+                const imgWrapper = card.querySelector('.image-wrapper');
+                const imgElement = imgWrapper.querySelector('img');
+
+                // Enter generating state
+                imgWrapper.classList.add('generating');
+
+                try {
+                    const response = await fetch('https://openrouter.ai/api/v1/images', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'Authorization': `Bearer ${openRouterKey}`,
+                            'HTTP-Referer': window.location.origin,
+                            'X-Title': 'Corporate Memphis Prompts Gallery'
+                        },
+                        body: JSON.stringify({
+                            model: openRouterModel,
+                            prompt: promptText,
+                            aspect_ratio: '4:3'
+                        })
+                    });
+
+                    if (!response.ok) {
+                        const errBody = await response.json().catch(() => ({}));
+                        throw new Error(errBody.error?.message || `HTTP ${response.status}`);
+                    }
+
+                    const json = await response.json();
+                    
+                    if (json.data && json.data[0]) {
+                        const imgObject = json.data[0];
+                        const srcUrl = imgObject.b64_json ? `data:image/png;base64,${imgObject.b64_json}` : imgObject.url;
+                        
+                        if (srcUrl) {
+                            imgElement.src = srcUrl;
+                            showToast('Preview updated!');
+                        } else {
+                            throw new Error('No image URL or base64 data returned.');
+                        }
+                    } else {
+                        throw new Error('Response format unrecognized.');
+                    }
+                } catch (error) {
+                    console.error('Image generation error:', error);
+                    alert(`Failed to generate: ${error.message}`);
+                } finally {
+                    imgWrapper.classList.remove('generating');
+                }
             }
         });
     </script>
